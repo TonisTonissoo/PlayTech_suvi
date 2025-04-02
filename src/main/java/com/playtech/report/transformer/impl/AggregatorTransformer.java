@@ -3,6 +3,9 @@ package com.playtech.report.transformer.impl;
 import com.playtech.report.Report;
 import com.playtech.report.column.Column;
 import com.playtech.report.transformer.Transformer;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlIDREF;
 
 import java.util.HashMap;
 import java.util.List;
@@ -75,9 +78,14 @@ public class AggregatorTransformer implements Transformer {
         }
     }
 
+    @XmlAccessorType(XmlAccessType.FIELD)
     public static class AggregateBy {
+        @XmlIDREF
         private Column input;
+
         private Method method;
+
+        @XmlIDREF
         private Column output;
 
         public Column getInput() {
@@ -92,6 +100,7 @@ public class AggregatorTransformer implements Transformer {
             return method;
         }
     }
+
 
     public enum Method {
         SUM,
