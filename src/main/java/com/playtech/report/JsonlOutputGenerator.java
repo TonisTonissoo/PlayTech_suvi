@@ -17,7 +17,7 @@ public class JsonlOutputGenerator {
 
     public void writeToJsonl(List<Object> data, String outputPath) throws IOException {
         File file = new File(outputPath);
-        file.getParentFile().mkdirs(); // Veendu, et väljundkaust on olemas
+        file.getParentFile().mkdirs();
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
             for (Object record : data) {
                 String json = mapper.writeValueAsString(record);

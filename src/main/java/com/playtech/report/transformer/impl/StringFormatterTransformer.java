@@ -23,7 +23,6 @@ public class StringFormatterTransformer implements Transformer {
     @Override
     public void transform(Report report, List<Map<String, Object>> rows) {
         for (Map<String, Object> row : rows) {
-            // Koostame väärtuse õigeks vorminguks
             StringBuilder sb = new StringBuilder();
             for (Column input : inputs) {
                 Object value = row.get(input.getName());

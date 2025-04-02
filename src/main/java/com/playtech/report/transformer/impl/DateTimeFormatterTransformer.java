@@ -36,7 +36,7 @@ public class DateTimeFormatterTransformer implements Transformer {
             } else if (value instanceof LocalDate ld) {
                 row.put(output.getName(), ld.format(formatter));
             } else {
-                row.put(output.getName(), null); // või logi viga
+                row.put(output.getName(), null);
             }
         }
     }

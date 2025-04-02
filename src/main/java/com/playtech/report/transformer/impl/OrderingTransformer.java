@@ -14,7 +14,6 @@ public class OrderingTransformer implements Transformer {
     private final Column input;
     private final Order order;
 
-    // Konstruktor, mis võtab vastu sisendi ja järjestuskorra (ASC või DESC)
     public OrderingTransformer(Column input, Order order) {
         this.input = input;
         this.order = order;
@@ -22,20 +21,17 @@ public class OrderingTransformer implements Transformer {
 
     @Override
     public void transform(Report report, List<Map<String, Object>> rows) {
-        // Kasutame Comparatorit, et järjestada andmed vastavalt veeru väärtusele
         Comparator<Map<String, Object>> comparator = (map1, map2) -> {
             Comparable value1 = (Comparable) map1.get(input.getName());
             Comparable value2 = (Comparable) map2.get(input.getName());
             return order == Order.ASC ? value1.compareTo(value2) : value2.compareTo(value1);
         };
 
-        // Järjestame andmed
         rows.sort(comparator);
     }
 
-    // Enum, mis määrab järjestuskorra
     public enum Order {
-        ASC,  // Tõusev järjestus
-        DESC  // Laskuv järjestus
+        ASC,
+        DESC
     }
 }

@@ -27,14 +27,14 @@ public class CSVReader {
                 if (line.trim().isEmpty()) continue;
 
                 String[] values = line.split(",", -1);
-                if (values.length != headers.length) continue; // Skip faulty lines
+                if (values.length != headers.length) continue;
 
                 TypedRecord record = new TypedRecord();
                 for (int i = 0; i < headers.length; i++) {
                     String columnName = headers[i];
                     String rawValue = values[i];
 
-                    // Leia vastav Column
+
                     Column column = inputColumns.stream()
                             .filter(col -> col.getName().equals(columnName))
                             .findFirst()
@@ -61,7 +61,7 @@ public class CSVReader {
                 case DATETIME -> raw.isBlank() ? null : ZonedDateTime.parse(raw);
             };
         } catch (Exception e) {
-            return null; // Võib logida, kui vaja
+            return null; 
         }
     }
 }

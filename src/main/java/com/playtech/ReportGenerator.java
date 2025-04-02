@@ -23,25 +23,20 @@ public class ReportGenerator {
         String outputDirectoryPath = args[2];
 
         try {
-            // 1. Parse XML konfiguratsioon (Report)
             Report report = XmlParser.parseReport(reportXmlFilePath);
 
-            // 2. Loe CSV andmed
             CSVReader reader = new CSVReader();
             List<TypedRecord> csvData = reader.readCsv(csvDataFilePath, report.getInputs());
 
-            // 3. Muuda CSV andmed Map<String, Object> tüübiks
             List<Map<String, Object>> transformedData = new ArrayList<>();
             for (TypedRecord record : csvData) {
                 transformedData.add(record.getAll());
             }
 
-            // Rakenda transformerid
             for (Transformer transformer : report.getTransformers()) {
                 transformer.transform(report, transformedData);
             }
 
-            // 4. Kirjuta JSONL väljund
             List<Object> outputData = new ArrayList<>(transformedData);
             JsonlOutputGenerator jsonlGenerator = new JsonlOutputGenerator();
             String outputFilePath = outputDirectoryPath + "/" + report.getReportName() + ".jsonl";
